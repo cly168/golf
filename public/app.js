@@ -8,6 +8,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: 'views/home/index.html',
             controller: 'HomeController'
         })
+        .when('/events', {
+        	templateUrl: 'views/events/index.html',
+        	controller: ''
+        })
 
     $locationProvider.html5Mode(true);
 
