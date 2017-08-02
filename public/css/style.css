@@ -1,0 +1,30 @@
+.carousel-caption {
+	right: 50%;
+	left: 0%;
+	top:15%;
+}
+
+.navbar-header {
+	width: 100%;
+	text-align:center;
+}
+
+.navbar-nav {
+	width:100%;
+}
+
+.navbar-nav li{
+	width: 25%;
+	text-align: center;
+}
+
+.navbar-logo {
+	color: white;
+	font-size: 5rem;
+}
+
+.navbar-logo:hover {
+	color: white;
+	text-decoration: none;
+	font-size: 5rem;
+}

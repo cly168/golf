@@ -1,4 +1,4 @@
-var app = angular.module('golf', ['ngRoute']);
+var app = angular.module('golf', ['ngRoute','ui.bootstrap']);
 
 app.config(function($routeProvider, $locationProvider) {
 
