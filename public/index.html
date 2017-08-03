@@ -12,22 +12,21 @@
     <!-- JS -->
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src='libs/angular-bootstrap/ui-bootstrap-tpls.min.js'></script>
 
     <!-- ANGULAR CUSTOM -->
     <script src="app.js"></script>
     <script src="views/home/controller.js"></script>
     <script src="components/navbar/controller.js"></script>
+    <script src="components/carousel/controller.js"></script>
 </head>
 <body ng-app="golf">
     <navbar></navbar>
-    <div class="container">
 
         <!-- HEADER -->
         
 
         <!-- ANGULAR DYNAMIC CONTENT -->
         <div ng-view></div>
-
-    </div>
 </body>
 </html>

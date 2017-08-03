@@ -1,4 +1,4 @@
-var app = angular.module('golf', ['ngRoute']);
+var app = angular.module('golf', ['ngRoute','ui.bootstrap']);
 
 app.config(function($routeProvider, $locationProvider) {
 
@@ -21,6 +21,6 @@ app.config(function($routeProvider, $locationProvider) {
         	templateUrl: 'views/gallery/index.html'
         })
 
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(false).hashPrefix('');
 
 });

@@ -7,8 +7,7 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'MainController'
         })
         .when('/events', {
-        	templateUrl: 'views/events/index.html',
-        	controller: ''
+        	templateUrl: 'views/events/index.html'
         })
 
     $locationProvider.html5Mode(true);

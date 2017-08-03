@@ -1,0 +1,139 @@
+<div class='container' ng-if='!carousel'>
+	<div class='row'>
+		<div class='row col-xs-12' ng-if='search'>
+			<label>Search: <input ng-model="$parent.accountVids" ng-change='updatePage($parent.accountVids);' placeholder="{{title}}"></label>
+		</div>
+		<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4' ng-repeat='link in linkList|filter: accountVids | pagination: page'>
+			<div class='card' >
+				<div class='card-header'>
+					<div class='card-left card-title'>
+						<i class="fa fa-heart" aria-hidden="true" ng-if='isFavorite(link) == true'></i>
+			 			<i class="fa fa-heart-o" aria-hidden="true" ng-if='isFavorite(link) == false'></i>
+						{{link.title}}
+					</div>
+					<div class='right category'>
+						<a class='clean_link' href='#/category/{{link.category.name}}'>
+							<img ng-if='getLogo(link.category.name) != false' ng-src='{{getLogo(link.category.name)}}' alt='{{link.category.name}}' uib-tooltip = "All recipes by {{link.category.name}}" tooltip-placement='bottom' class='card_logo'>
+							<span class='category_text' uib-tooltip = "All recipes by {{link.category.name}}" tooltip-placement='bottom' ng-if='getLogo(link.category.name) == false'>
+								{{link.category.name}}
+							</span>
+						</a>
+					</div>
+				</div>
+				<!-- <img class='card-img' alt='link.title' ng-src='https://img.youtube.com/vi/{{link.link}}/maxresdefault.jpg' ng-click="openComponentModal($index)"> -->
+				<div class='img-class' style='background-image:url("https://img.youtube.com/vi/{{link.link}}/0.jpg")' ng-click="openComponentModal(link)">
+				</div>
+				<div>
+					<button type = "button" ng-click='favorite(link._id)' ng-if='isLoggedIn' class="promo-button full-width">
+						<div ng-if="!isFavorite(link)" class="btn btn-burn full-width">CookDat</div>
+						<div ng-if="isFavorite(link)" class="btn btn-danger full-width">BurnDat</div>
+					</button>
+					<button type = "button" ng-if='!isLoggedIn' class="promo-button full-width">
+						<div class="btn btn-danger full-width" ng-click='login();'>
+							CookDat
+						</div>
+					</button>
+					<div class="card-bottom">
+						<span ng-repeat="tag in link.tag | orderBy:'name'" class='card-left'>
+							<a href='#/tag/{{tag.name}}' class='clean_link'>	{{tag.name}}
+							</a>
+						</span>
+					</div>
+					<div class="card-footer">
+						<button class=" btn tag" popover-trigger="'outsideClick'" uib-popover-html="popoverLink(link)">See all tags</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='row' ng-if='getPageCount().length != 1'>
+		<div class='center'>
+			<div class="btn-group">
+				<span ng-repeat='i in getPageCount() track by $index'>
+		        	<label ng-if='!currentPage($index)' class="pagination" ng-model="radioModel" ng-click='setPage($index + 1)' uib-btn-radio="{{i}}">{{$index + 1}}</label>
+		        	<label ng-if='currentPage($index)' class="pagination_active" ng-model="radioModel" ng-click='setPage($index + 1)' uib-btn-radio="{{i}}">{{$index + 1}}</label>
+		        </span>
+	    	</div>
+		</div>
+	</div>
+</div>
+<div class='container promo_bar' ng-if='carousel'>
+	<div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" no-transition="noTransition">
+		<div uib-slide ng-repeat="links in carouselLinks track by $index" index="$index">
+			<div class='row left'>
+				<div class='col-sm-4' ng-repeat='link in links'>
+					<div ng-if='link.valid' class='card'>
+						 <div class='card-header'>
+							<div class='card-left card-title'>
+								<i class="fa fa-heart" aria-hidden="true" ng-if='isFavorite(link) == true'></i>
+					 			<i class="fa fa-heart-o" aria-hidden="true" ng-if='isFavorite(link) == false'></i>
+								{{link.title}}
+							</div>
+							<div class='right category'>
+								<a class='clean_link' href='#/category/{{link.category.name}}'>
+									<img ng-if='getLogo(link.category.name) != false' ng-src='{{getLogo(link.category.name)}}' alt='{{link.category.name}}' uib-tooltip = "All recipes by {{link.category.name}}" tooltip-placement='bottom' class='card_logo'>
+								<span class='category_text' uib-tooltip = "All recipes by {{link.category.name}}" tooltip-placement='bottom' ng-if='getLogo(link.category.name) == false'>
+									{{link.category.name}}
+								</span>
+							</a>
+							</div>
+						</div>
+						<div class='img-class' style='background-image:url("https://img.youtube.com/vi/{{link.link}}/0.jpg")' ng-click="openComponentModal(link)">
+						</div>
+						<div>
+							<button type = "button" ng-click='favorite(link._id)' ng-if='isLoggedIn' class="promo-button full-width">
+								<div ng-if="!isFavorite(link)" class="btn btn-burn full-width">CookDat</div>
+								<div ng-if="isFavorite(link)" class="btn btn-danger full-width">BurnDat</div>
+							</button>
+							<button type = "button" ng-if='!isLoggedIn' class="promo-button full-width" ng-click='login();'>
+								<div class="btn btn-danger full-width">
+									CookDat
+								</div>
+							</button>
+							<div class="card-bottom">
+								<span ng-repeat="tag in link.tag | orderBy:'name'" class='card-left'>
+									<a href='#/tag/{{tag.name}}' class='clean_link'>	
+										{{tag.name}}
+									</a>
+								</span>
+							</div>
+							<div class="card-footer">
+								<button class=" btn tag" popover-trigger="'outsideClick'" uib-popover-html="popoverLink(link)">See all tags</button>
+							</div>
+						</div> 
+					</div>
+					<div ng-if='!link.valid' class='card'>
+						
+							<h1 class='see_all'>
+								<a href='#/all/{{link.dest}}' class='see_all_wrapper'>
+									<br>See All<br> {{link.dest}} <i class="fa fa-cutlery" aria-hidden="true"></i>
+								</a>
+							</h1>
+					</div>
+					<!-- <div ng-if='!link.valid' class='card'>
+						 <div class='card-header'>
+							<div class='card-left card-title'>
+								See All {{link.dest}}
+							</div>
+							<div class='right category'>
+								CookDat
+							</div>
+						</div>
+						<div class='img-class' style='background-image:url("{{link.url}}'>
+						</div>
+						<div>
+							<button type = "button" class="promo-button full-width">
+								<div class="btn btn-danger full-width">CookDat</div>
+							</button>
+							<div class="card-bottom">
+							</div>
+							<div class="card-footer">
+
+							</div>
+						</div> 
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.5",
+    "angular-bootstrap": "^0.12.2",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "method-override": "^2.3.9",
